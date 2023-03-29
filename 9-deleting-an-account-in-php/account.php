@@ -31,19 +31,21 @@ session_start(); ?>
 	<input type="submit" name="submit">
 </form>
 
-<p><a href="changePassword.php">сменить пароль</a></p>
-
-<p><a href="deleteAccount.php">удалить аккаунт</a></p>
-
 <?php
 	if (!empty($_POST['submit'])) {
 		$name = $_POST['name'];
 		$surname = $_POST['surname'];
+		$patronymic = $_POST['patronymic'];
 		
-		$query = "UPDATE users 
+		$query = "UPDATE users2 
 			SET name='$name', surname='$surname',
             patronymic='$patronymic' 
 			WHERE id=$id"; 
 		mysqli_query($link, $query);
+		echo 'данные успешно изменнены';
 	}
 ?>
+
+<p><a href="changePassword.php">сменить пароль</a></p>
+
+<p><a href="deleteAccount.php">удалить аккаунт</a></p>

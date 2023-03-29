@@ -12,7 +12,7 @@ session_start(); ?>
 <!DOCTYPE html>
 <html>
 	<head>
-    <p><a href="deleteAccount.php">удалить аккаунт</a></p>
+    
 	</head>
 	<body>
 		<p><?php for($i=1;$i<=3;++$i){ ?>

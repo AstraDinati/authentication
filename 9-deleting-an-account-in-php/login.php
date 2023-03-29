@@ -26,8 +26,7 @@ session_start(); ?>
 	if (!empty($_POST['password']) and !empty($_POST['login'])) {
 		$login = $_POST['login'];
 		
-		$query = "SELECT * 
-			FROM users2 WHERE login='$login'"; 
+		$query = "SELECT * FROM users2 WHERE login='$login'"; 
 		$result = mysqli_query($link, $query);
 		$user = mysqli_fetch_assoc($result);
 		

@@ -17,16 +17,21 @@ session_start(); ?>
 </form>
 
 <?php 
-$id = $_SESSION['id'];
-$query = "SELECT * FROM users2 WHERE id='$id'"; 
-$result = mysqli_query($link, $query);
-$user = mysqli_fetch_assoc($result);
+if(isset($_POST['password'])){
+    $id = $_SESSION['id'];
+    $query = "SELECT * FROM users2 WHERE id='$id'"; 
+    $result = mysqli_query($link, $query);
+    $user = mysqli_fetch_assoc($result);
 	
-$hash = $user['password'];
+    $hash = $user['password'];
 
-if (password_verify($_POST['password'], $hash)) {
-    $query = "DELETE FROM users2 WHERE id='$id'";
-    $_SESSION['auth'] = false;
-    header('Location: index.php');
-} else {echo 'неверный пароль';} 
+    if (password_verify($_POST['password'], $hash)) {
+        $query = "DELETE FROM users2 WHERE id='$id'";
+        mysqli_query($link, $query);
+        
+        $_SESSION['auth'] = false;
+        header('Location: index.php');
+
+    } else {echo 'неверный пароль';} 
+}
 ?>
