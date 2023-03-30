@@ -17,11 +17,12 @@ mysqli_query($link, "SET NAMES 'utf-8'");  ?>
     <?php
     if (!empty($_SESSION['auth'])) {
         $id = $_SESSION['id'];
+        $status = $_SESSION['status'];
         $query = "SELECT login, status_id FROM users2 WHERE id=$id";
         $user = mysqli_fetch_assoc(mysqli_query($link, $query));
     ?>
         login: <a href="profile.php?id=<?= $id ?>"><?php echo $user['login']; ?></a><br>
-        status: <?php echo $user['status_id'];
+        status: <?php echo $status;
             } ?>
 </head>
 
@@ -34,13 +35,17 @@ mysqli_query($link, "SET NAMES 'utf-8'");  ?>
             <th>удалить</th>
         </tr>
         <?php
-        $query = 'SELECT login, id, status_id FROM users2';
+        $query = "SELECT users2.*,
+		statuses.name AS status 
+		FROM users2 
+		LEFT JOIN statuses
+	ON statuses.id=users2.status_id";
         $result = mysqli_query($link, $query) or die(mysqli_error($link));
         for ($data = []; $row = mysqli_fetch_assoc($result); $data[] = $row);
         foreach ($data as $key => $arr) {
             $id = $arr['id'];
             $login = $arr['login'];
-            $status = $arr['status_id']; ?>
+            $status = $arr['status']; ?>
             <tr>
                 <td><a href="profile.php/?id=<?= $id ?>"><?= $login ?></a></td>
                 <td><?= $status ?></td>

@@ -28,11 +28,11 @@ unset($_SESSION['reg_log']);
 if (!empty($_POST['password']) and !empty($_POST['login'])) {
 	$login = $_POST['login'];
 
-	$query = "SELECT *,
+	$query = "SELECT users2.*,
 		statuses.name AS status 
 		FROM users2 
 		LEFT JOIN statuses
-	ON users2.status_id=statuses.id 
+	ON statuses.id=users2.status_id
 		WHERE login='$login'";
 	$result = mysqli_query($link, $query);
 	$user = mysqli_fetch_assoc($result);
@@ -45,8 +45,7 @@ if (!empty($_POST['password']) and !empty($_POST['login'])) {
 			$_SESSION['login'] = $_POST['login'];
 			$_SESSION['id'] = $user['id'];
 			$_SESSION['status'] = $user['status'];
-			echo $_SESSION['id'];
-			// header('Location: index.php');
+			header('Location: index.php');
 		} else {
 			echo 'неверно введён логин или пароль';
 		}

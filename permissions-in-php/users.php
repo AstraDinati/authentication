@@ -13,20 +13,21 @@ mysqli_query($link, "SET NAMES 'utf-8'");  ?>
 <html>
 
 <head>
-    <?php
-    if (!empty($_SESSION['auth'])) {
-        $id = $_SESSION['id'];
-        $query = "SELECT login, status_id FROM users2 WHERE id=$id";
-        $user = mysqli_fetch_assoc(mysqli_query($link, $query));
-    ?>
-        login: <a href="profile.php?id=<?= $id ?>"><?php echo $user['login']; ?></a><br>
-        status: <?php echo $user['status_id'];
-            } ?><br>
-    <?php if ($_SESSION['status_id'] == '2') {
-    ?>
-        <a href="admin.php">админка</a>
-    <?php }
-    ?>
+	<?php
+	if (!empty($_SESSION['auth'])) {
+		$id = $_SESSION['id'];
+		$status = $_SESSION['status'];
+		$query = "SELECT login, status_id FROM users2 WHERE id=$id";
+		$user = mysqli_fetch_assoc(mysqli_query($link, $query));
+	?>
+		login: <a href="profile.php?id=<?= $id ?>"><?php echo $user['login']; ?></a><br>
+		status: <?php echo $status;
+			} ?><br>
+	<?php if ($_SESSION['status_id'] == '2') {
+	?>
+		<a href="admin.php">админка</a>
+	<?php }
+	?>
 </head>
 
 <body>
