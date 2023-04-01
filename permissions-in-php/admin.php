@@ -49,7 +49,7 @@ mysqli_query($link, "SET NAMES 'utf-8'");  ?>
             <tr>
                 <td><a href="profile.php/?id=<?= $id ?>"><?= $login ?></a></td>
                 <td><?= $status ?></td>
-                <td><a href="?edit=<?= $id ?>"><?php if ($status == 2) {
+                <td><a href="?edit=<?= $id ?>"><?php if ($status == 'admin') {
                                                     echo 'сделать юзером';
                                                 } else {
                                                     echo 'сделать админом';
